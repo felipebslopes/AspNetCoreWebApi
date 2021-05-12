@@ -13,7 +13,11 @@ using SmartSchool.API.Models;
 
 namespace SmartSchool.API.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// 
+    /// </summary>
+    [Route("api/v{verson:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class AlunoController : ControllerBase
     {
@@ -21,12 +25,18 @@ namespace SmartSchool.API.Controllers
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public AlunoController( IRepository repository, IMapper mapper) {
          
             _repository = repository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// Método responsável por retornar todos os meus alunos
+        /// </summary>
+        /// <returns></returns>
         // GET: api/<AlunoController>
         [HttpGet]
         public IActionResult Get()
@@ -35,6 +45,11 @@ namespace SmartSchool.API.Controllers
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
 
+        /// <summary>
+        /// Método responsável por retornar apenas um aluno por meio do Código ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET api/<AlunoController>/5
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -65,6 +80,11 @@ namespace SmartSchool.API.Controllers
         //    }
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Post(AlunoRegistrarDto model)
         {
@@ -78,6 +98,12 @@ namespace SmartSchool.API.Controllers
                 return BadRequest("Aluno não cadastrado");
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
 
         [HttpPut("{id}")]
         public IActionResult Put(int id , AlunoRegistrarDto model)

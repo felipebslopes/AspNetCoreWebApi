@@ -12,7 +12,8 @@ using SmartSchool.API.Models;
 
 namespace SmartSchool.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{verson:apiVersion}/[controller]")]
+    [ApiVersion("2.0")]
     [ApiController]
     public class ProfessorController : ControllerBase
     {
